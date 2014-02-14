@@ -78,7 +78,7 @@ exports.save = function(req, res){
     var advert = new global.lbc.advert();
     var _advert = req.body;
     if(_advert.numero){
-        var fullURL = req.protocol + "://" + req.get('host');
+        var fullURL = req.protocol + "://" + req.get('host') + "/";
         console.log('receive from : '+ fullURL);
         global.waitingList.forEach(function(ad){
             global.waitingList.splice(global.waitingList.indexOf(ad), 1);
