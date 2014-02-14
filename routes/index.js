@@ -18,7 +18,7 @@ exports.signin = function(req, res){
 exports.addServer = function(req, res){
     if(req.body.url)
         global.servList.push({url: req.body.url, stat: false});
-    res.redirect('home');
+    res.redirect('/home');
 };
 
 exports.auth = function(req, res){
@@ -26,7 +26,7 @@ exports.auth = function(req, res){
     if (post.user == global.user && post.password == global.password) {
         req.session.user = post.user;
         req.session.password = post.password;
-        res.redirect('home');
+        res.redirect('/home');
     } else {
         res.render('signin');
     }
@@ -34,7 +34,7 @@ exports.auth = function(req, res){
 
 exports.logOut = function(req, res){
     req.session = null;
-    res.redirect('home');
+    res.redirect('/home');
 };
 
 exports.start = function(req, res){
@@ -53,7 +53,7 @@ exports.start = function(req, res){
     global.waitingList = [];
     global.runningList = [];
     global.running = true;
-    res.redirect('home');
+    res.redirect('/home');
 };
 
 exports.stop = function(req, res){
@@ -71,7 +71,7 @@ exports.stop = function(req, res){
     global.waitingList = [];
     global.runningList = [];
     global.running = false;
-    res.redirect('home');
+    res.redirect('/home');
 };
 
 exports.save = function(req, res){
@@ -135,7 +135,7 @@ exports.updateServer = function(req, res){
             });
         });
     }
-    res.redirect('home');
+    res.redirect('/home');
 };
 
 exports.exportAllJson = function(req, res){
