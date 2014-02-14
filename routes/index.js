@@ -12,7 +12,7 @@ exports.index = function(req, res){
 };
 
 exports.signin = function(req, res){
-    res.render('signin');
+    res.render('/signin');
 };
 
 exports.addServer = function(req, res){
@@ -28,7 +28,7 @@ exports.auth = function(req, res){
         req.session.password = post.password;
         res.redirect('/home');
     } else {
-        res.render('signin');
+        res.render('/signin');
     }
 };
 
