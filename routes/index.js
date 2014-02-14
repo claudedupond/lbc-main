@@ -80,12 +80,12 @@ exports.save = function(req, res){
     if(_advert.numero){
         console.log('receive from : '+ req.url);
         global.waitingList.forEach(function(ad){
-            global.servList.forEach(function(serv){
-                var fullURL = req.protocol + "://" + req.get('host');
-                if(serv.url === fullURL)
-                    serv.count++;
-            });
             global.waitingList.splice(global.waitingList.indexOf(ad), 1);
+        });
+        var fullURL = req.protocol + "://" + req.get('host');
+        global.servList.forEach(function(serv){
+            if(serv.url === fullURL)
+                serv.count++;
         });
         advert.nom = _advert.nom;
         advert.prix = _advert.prix;
