@@ -18,7 +18,7 @@ exports.signin = function(req, res){
 exports.addServer = function(req, res){
     if(req.body.url)
         global.servList.push({url: req.body.url, stat: false});
-    res.redirect('/');
+    res.redirect('home');
 };
 
 exports.auth = function(req, res){
@@ -26,7 +26,7 @@ exports.auth = function(req, res){
     if (post.user == global.user && post.password == global.password) {
         req.session.user = post.user;
         req.session.password = post.password;
-        res.redirect('/');
+        res.redirect('home');
     } else {
         res.render('signin');
     }
@@ -34,7 +34,7 @@ exports.auth = function(req, res){
 
 exports.logOut = function(req, res){
     req.session = null;
-    res.redirect('/');
+    res.redirect('home');
 };
 
 exports.start = function(req, res){
@@ -53,7 +53,7 @@ exports.start = function(req, res){
     global.waitingList = [];
     global.runningList = [];
     global.running = true;
-    res.redirect('/');
+    res.redirect('home');
 };
 
 exports.stop = function(req, res){
@@ -71,7 +71,7 @@ exports.stop = function(req, res){
     global.waitingList = [];
     global.runningList = [];
     global.running = false;
-    res.redirect('/');
+    res.redirect('home');
 };
 
 exports.save = function(req, res){
@@ -80,9 +80,10 @@ exports.save = function(req, res){
     if(_advert.numero){
         console.log('receive from : '+ req.url);
         global.waitingList.forEach(function(ad){
-            if(ad.url === _advert.url){
+            if(ad.url === req.url){
                 global.servList.forEach(function(serv){
-                    if(serv.url === _advert.url)
+                    var fullURL = req.protocol + "://" + req.get('host');
+                    if(serv.url === fullURL)
                         serv.count++;
                 });
                 global.waitingList.splice(global.waitingList.indexOf(ad), 1);
@@ -134,7 +135,7 @@ exports.updateServer = function(req, res){
             });
         });
     }
-    res.redirect('/');
+    res.redirect('home');
 };
 
 exports.exportAllJson = function(req, res){

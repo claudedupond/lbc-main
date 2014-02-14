@@ -30,14 +30,14 @@ if ('development' == app.get('env')) {
 function checkAuth(req, res, next) {
     console.log(req.session.user +" : "+ req.session.password);
     if (!req.session.user && !req.session.password) {
-        res.redirect('/signin');
+        res.redirect('/');
     } else {
         next();
     }
 }
 
-app.get('/', checkAuth, routes.index);
-app.get('/signin', routes.signin);
+app.get('/',  routes.signin);
+app.get('/home', checkAuth, routes.index);
 app.post('/addServer', checkAuth, routes.addServer);
 app.post('/updateserver', checkAuth, routes.updateServer);
 app.get('/logout', checkAuth, routes.logOut);
