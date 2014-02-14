@@ -78,15 +78,15 @@ exports.save = function(req, res){
     var advert = new global.lbc.advert();
     var _advert = req.body;
     if(_advert.numero){
-        console.log('receive from : '+ req.url);
+        var fullURL = req.protocol + "://" + req.get('host');
+        console.log('receive from : '+ fullURL);
         global.waitingList.forEach(function(ad){
             global.waitingList.splice(global.waitingList.indexOf(ad), 1);
         });
-        var fullURL = req.protocol + "://" + req.get('host');
-        global.servList.forEach(function(serv){
+        for(var i=0; i< global.servList; i++){
             if(serv.url === fullURL)
-                serv.count++;
-        });
+                global.servList[i].count++;    
+        }
         advert.nom = _advert.nom;
         advert.prix = _advert.prix;
         advert.ville = _advert.ville;
