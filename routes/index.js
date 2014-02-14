@@ -12,7 +12,7 @@ exports.index = function(req, res){
 };
 
 exports.signin = function(req, res){
-    res.render('/signin');
+    res.render('signin');
 };
 
 exports.addServer = function(req, res){
