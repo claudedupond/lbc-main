@@ -28,7 +28,7 @@ exports.auth = function(req, res){
         req.session.password = post.password;
         res.redirect('/home');
     } else {
-        res.render('/signin');
+        res.redirect('/');
     }
 };
 
