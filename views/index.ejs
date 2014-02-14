@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>lbc-dev</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+<div class="container">
+
+    <div class="masthead">
+        <h3 class="text-muted">leboncoin</h3>
+        <ul class="nav nav-justified">
+            <li><a href="/logout">logout</a></li>
+        </ul>
+    </div>
+
+
+    <div class="masthead">
+        <h3 class="text-muted">main setting :::::::  running : <%=running%></h3>
+        <ul class="nav nav-justified">
+            <li><a href="/start">start</a></li>
+            <li><a href="/stop">stop</a></li>
+        </ul>
+    </div>
+
+    <div class="masthead">
+        <h3 class="text-muted">Update Main server : </h3>
+        <form action="/updateServer" method="post">
+            <input  name="server" class="form-control" placeholder="server url" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">save</button>
+        </form>
+    </div>
+
+    <div class="masthead">
+        <table style="width: 35%; float:left;">
+            <tr>
+                <th><h3 class="text-muted">servers list : <%= online %>/<%= servList.length %></h3></th>
+            </tr>
+            <tr>
+                <td>
+                    <h3 class="text-muted">add server</h3>
+                    <form class="form-signin" role="form" action="/addserver" method="post">
+                        <input  name="url" class="form-control" placeholder="server url" required autofocus>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">add</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <% for(var i=0; i<servList.length; i++) { %>
+                        <li>
+                            <a href='<%= servList[i].url %>' target="_blank"> <%= servList[i].url%></a>  <  ==  > <%=servList[i].count %>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+
+        <table style="width: 30%; float:left; margin: 2px;">
+            <tr>
+                <th><h3 class="text-muted">waiting list</h3></th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <% for(var i=0; i<waitingList.length; i++) { %>
+                        <li>
+                            <a href='<%= waitingList[i].options.url %>' target="_blank"> <%= waitingList[i].options.url%></a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 28%; float:left; margin: 2px;">
+            <tr>
+                <th><h3 class="text-muted">running list</h3></th>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <% for(var i=0; i<runningList.length; i++) { %>
+                        <li>
+                            <a href='<%= runningList[i].options.url %>' target="_blank"> <%= runningList[i].options.url%></a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+</div> <!-- /container -->
+
+<!-- main js -->
+<script src="/javascripts/lbc-dev.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/javascripts/bootstrap.min.js"></script>
+</body>
+</html>
